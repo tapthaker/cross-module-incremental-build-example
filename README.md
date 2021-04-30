@@ -2,7 +2,7 @@
 
 Test out the new `-enable-experimental-cross-module-incremental-build`and simulate a change where transitive module changes are not going to be rebuilt by Swift.
 
-##Usage:
+## Usage:
 ```
 USE_INCREMENTAL=1 TEST_NAME=test-skip-transitive-recompilation ./test.sh
 ```
@@ -13,7 +13,7 @@ Available Tests:
 - test-skip-transitive-recompilation
 - test-skip-unused-structs
 
-##Results:
+## Results:
 ```
 temp_dir: /var/folders/5r/ztqn6j_d32n3nnpz7wx2rgjh0000gn/T/tmp.Rl8JPaQe
 /var/folders/5r/ztqn6j_d32n3nnpz7wx2rgjh0000gn/T/tmp.Rl8JPaQe ~/cross-module-incremental-build-example
