@@ -29,10 +29,8 @@ for i in 1 2; do
 
   for f in $TEST_NAME/$i/*; do
     filename=$(basename $f)
-    if [ ! -f "$filename" ] || [ "$(cmp --silent "$filename" "$f"; echo $?)" -eq 1 ]; then
-        echo "Modifying $filename"
-        cp "$f" "$filename"
-    fi
+    echo "Modifying $filename"
+    cp "$f" "$filename"
   done
 
   extra_flags=( -enable-experimental-cross-module-incremental-build -driver-show-incremental -driver-show-job-lifecycle )
