@@ -1,15 +1,15 @@
 {
   "C.swift": {
     "object": "./C.o",
-    "swift-dependencies": "./C.swiftdeps",
+    "swift-dependencies": "./C~partial.swiftdeps",
     "swiftmodule": "./C~partial.swiftmodule",
-    "swiftdoc": "./C.swiftdoc"
+    "swiftdoc": "./C~partial.swiftdoc"
   },
   "C_unused.swift": {
     "object": "./C_unused.o",
-    "swift-dependencies": "./C_unused.swiftdeps",
+    "swift-dependencies": "./C_unused~partial.swiftdeps",
     "swiftmodule": "./C_unused~partial.swiftmodule",
-    "swiftdoc": "./C_unused.swiftdoc"
+    "swiftdoc": "./C_unused~partial.swiftdoc"
   },
   "": {
     "swift-dependencies": "./C~buildrecord.swiftdeps"

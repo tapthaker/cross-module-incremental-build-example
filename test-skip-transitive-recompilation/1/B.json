@@ -1,9 +1,9 @@
 {
   "B.swift": {
     "object": "./B.o",
-    "swift-dependencies": "./B.swiftdeps",
+    "swift-dependencies": "./B~partial.swiftdeps",
     "swiftmodule": "./B~partial.swiftmodule",
-    "swiftdoc": "./B.swiftdoc"
+    "swiftdoc": "./B~partial.swiftdoc"
   },
   "": {
     "swift-dependencies": "./B~buildrecord.swiftdeps"
