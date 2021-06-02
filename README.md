@@ -20,6 +20,9 @@ Available environment variables:
 
 ## Results:
 ```
+Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
+Target: x86_64-apple-darwin20.5.0
+
 temp_dir: /var/folders/5r/ztqn6j_d32n3nnpz7wx2rgjh0000gn/T/tmp.Rl8JPaQe
 /var/folders/5r/ztqn6j_d32n3nnpz7wx2rgjh0000gn/T/tmp.Rl8JPaQe ~/cross-module-incremental-build-example
 

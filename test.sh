@@ -2,10 +2,14 @@
 
 USE_INCREMENTAL=${USE_INCREMENTAL:-0}
 USE_STABLE_API=${USE_STABLE_API:-0}
+
 if [ -z "$TEST_NAME" ]; then
   echo "\$TEST_NAME undefined"
   exit 1
 fi
+
+swift --version
+echo
 
 temp_dir=$(mktemp -d)
 echo "temp_dir: $temp_dir"
