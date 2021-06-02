@@ -38,15 +38,15 @@ for i in 1 2; do
     extra_flags+=( -incremental )
   fi
 
-  /usr/bin/swiftc -c -emit-dependencies -emit-module -emit-module-path "$temp_dir/C.swiftmodule" \
+  /usr/bin/swiftc -c -emit-module -emit-module-path "$temp_dir/C.swiftmodule" \
     -module-name C -I "$temp_dir" -output-file-map "$temp_dir/C.json" -working-directory "$temp_dir"  \
     ${extra_flags[@]} C*.swift
 
-  /usr/bin/swiftc -c -emit-dependencies -emit-module -emit-module-path "$temp_dir/B.swiftmodule" \
+  /usr/bin/swiftc -c -emit-module -emit-module-path "$temp_dir/B.swiftmodule" \
     -module-name B -I "$temp_dir" -output-file-map "$temp_dir/B.json" -working-directory "$temp_dir"  \
      ${extra_flags[@]} B*.swift
 
-  /usr/bin/swiftc -c -emit-dependencies -emit-module -emit-module-path "$temp_dir/A.swiftmodule" \
+  /usr/bin/swiftc -c -emit-module -emit-module-path "$temp_dir/A.swiftmodule" \
     -module-name A -I "$temp_dir" -output-file-map "$temp_dir/A.json" -working-directory "$temp_dir"  \
     ${extra_flags[@]}  A*.swift
 done
