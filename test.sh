@@ -1,6 +1,7 @@
 #!/bin/bash
 
 USE_INCREMENTAL=${USE_INCREMENTAL:-0}
+USE_STABLE_API=${USE_STABLE_API:-0}
 if [ -z "$TEST_NAME" ]; then
   echo "\$TEST_NAME undefined"
   exit 1
@@ -35,9 +36,14 @@ for i in 1 2; do
     cp "$f" "$filename"
   done
 
-  extra_flags=( -enable-experimental-cross-module-incremental-build -driver-show-incremental -driver-show-job-lifecycle )
+  extra_flags=( -driver-show-incremental -driver-show-job-lifecycle )
   if [ "${USE_INCREMENTAL:-0}" -eq 1 ]; then
     extra_flags+=( -incremental )
+  fi
+  if [[ "${USE_STABLE_API:-0}" -eq 1 ]]; then
+    extra_flags+=( -enable-incremental-imports )
+  else
+    extra_flags+=( -enable-experimental-cross-module-incremental-build  )
   fi
 
   echo

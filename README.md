@@ -4,7 +4,7 @@ Test out the new `-enable-experimental-cross-module-incremental-build`and simula
 
 ## Usage:
 ```
-USE_INCREMENTAL=1 TEST_NAME=test-skip-transitive-recompilation ./test.sh
+TEST_NAME=test-skip-transitive-recompilation ./test.sh
 ```
 
 Available Tests:
@@ -12,6 +12,11 @@ Available Tests:
 - test-add-private-function
 - test-skip-transitive-recompilation
 - test-skip-unused-structs
+
+Available environment variables:
+
+- `USE_INCREMENTAL=1`: Uses the `-incremental` flag. This is of course required for cross module incremental builds.
+- `USE_STABLE_API=1`: Uses `-enable-incremental-imports` instead of `-enable-experimental-cross-module-incremental-build`, which is the flag that is used in Swift 5.5.
 
 ## Results:
 ```
