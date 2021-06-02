@@ -17,6 +17,7 @@ Available environment variables:
 
 - `USE_INCREMENTAL=1`: Uses the `-incremental` flag. This is of course required for cross module incremental builds.
 - `USE_STABLE_API=1`: Uses `-enable-incremental-imports` instead of `-enable-experimental-cross-module-incremental-build`, which is the flag that is used in Swift 5.5.
+- `USE_BAZEL=1`: Uses `bazel` to build instead of invoking `swiftc` directly.
 
 ## Results:
 ```
