@@ -27,6 +27,8 @@ for i in 1 2; do
 
   wait_for_key_press
 
+  echo
+  echo "* Changing source files *"
   for f in $TEST_NAME/$i/*; do
     filename=$(basename $f)
     echo "Modifying $filename"
@@ -38,14 +40,20 @@ for i in 1 2; do
     extra_flags+=( -incremental )
   fi
 
+  echo
+  echo "* Compiling C *"
   /usr/bin/swiftc -c -emit-module -emit-module-path "$temp_dir/C.swiftmodule" \
     -module-name C -I "$temp_dir" -output-file-map "$temp_dir/C.json" -working-directory "$temp_dir"  \
     ${extra_flags[@]} C*.swift
 
+  echo
+  echo "* Compiling B *"
   /usr/bin/swiftc -c -emit-module -emit-module-path "$temp_dir/B.swiftmodule" \
     -module-name B -I "$temp_dir" -output-file-map "$temp_dir/B.json" -working-directory "$temp_dir"  \
      ${extra_flags[@]} B*.swift
 
+  echo
+  echo "* Compiling A *"
   /usr/bin/swiftc -c -emit-module -emit-module-path "$temp_dir/A.swiftmodule" \
     -module-name A -I "$temp_dir" -output-file-map "$temp_dir/A.json" -working-directory "$temp_dir"  \
     ${extra_flags[@]}  A*.swift
