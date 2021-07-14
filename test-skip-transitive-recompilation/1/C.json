@@ -1,9 +1,9 @@
 {
   "C.swift": {
     "object": "./C.o",
-    "swift-dependencies": "./C.swiftdeps",
+    "swift-dependencies": "./C~partial.swiftdeps",
     "swiftmodule": "./C~partial.swiftmodule",
-    "swiftdoc": "./C.swiftdoc"
+    "swiftdoc": "./C~partial.swiftdoc"
   },
   "": {
     "swift-dependencies": "./C~buildrecord.swiftdeps"
