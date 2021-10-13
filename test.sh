@@ -53,7 +53,10 @@ for i in 1 2; do
   done
 
   if [ "${USE_BAZEL:-0}" -eq 1 ]; then
-    extra_flags=( --xcode_version=12.5.0.12E262 --swiftcopt=-driver-show-incremental --swiftcopt=-driver-show-job-lifecycle )
+    extra_flags=(
+      --swiftcopt=-driver-show-incremental
+      --swiftcopt=-driver-show-job-lifecycle
+    )
     if [ "${USE_INCREMENTAL:-0}" -ne 1 ]; then
       extra_flags+=( --swiftcopt=-whole-module-optimization )
     fi
@@ -62,6 +65,8 @@ for i in 1 2; do
     else
       extra_flags+=( --swiftcopt=-enable-experimental-cross-module-incremental-build  )
     fi
+
+    extra_flags+=("$@")
 
     echo
     echo "* Compiling *"
@@ -76,6 +81,8 @@ for i in 1 2; do
     else
       extra_flags+=( -enable-experimental-cross-module-incremental-build  )
     fi
+
+    extra_flags+=("$@")
 
     echo
     echo "* Compiling C *"
