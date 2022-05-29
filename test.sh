@@ -1,8 +1,8 @@
 #!/bin/bash
 
-USE_INCREMENTAL=${USE_INCREMENTAL:-0}
-USE_STABLE_API=${USE_STABLE_API:-0}
-USE_BAZEL=${USE_BAZEL:-0}
+readonly use_incremental=${USE_INCREMENTAL:-0}
+readonly use_stable_api=${USE_STABLE_API:-1}
+readonly use_bazel=${USE_BAZEL:-0}
 
 if [ -z "$TEST_NAME" ]; then
   echo "\$TEST_NAME undefined"
@@ -12,7 +12,7 @@ fi
 swift --version
 echo
 
-if [[ "${USE_BAZEL:0}" -eq 1 ]]; then
+if [[ $use_bazel -eq 1 ]]; then
   temp_dir="/tmp/bazel-cross-module-incremental-build"
   rm -rf "$temp_dir"
   mkdir "$temp_dir"
@@ -53,29 +53,36 @@ for i in 1 2; do
   done
 
   if [ "${USE_BAZEL:-0}" -eq 1 ]; then
-    extra_flags=( --xcode_version=12.5.0.12E262 --swiftcopt=-driver-show-incremental --swiftcopt=-driver-show-job-lifecycle )
-    if [ "${USE_INCREMENTAL:-0}" -ne 1 ]; then
+    extra_flags=(
+      --swiftcopt=-driver-show-incremental
+      --swiftcopt=-driver-show-job-lifecycle
+    )
+    if [[ $use_incremental -ne 1 ]]; then
       extra_flags+=( --swiftcopt=-whole-module-optimization )
     fi
-    if [ "${USE_STABLE_API:-0}" -eq 1 ]; then
+    if [[ $use_stable_api -eq 1 ]]; then
       extra_flags+=( --swiftcopt=-enable-incremental-imports )
     else
       extra_flags+=( --swiftcopt=-enable-experimental-cross-module-incremental-build  )
     fi
+
+    extra_flags+=("$@")
 
     echo
     echo "* Compiling *"
     bazel build --verbose_failures ${extra_flags[@]} -- //:A
   else
     extra_flags=( -driver-show-incremental -driver-show-job-lifecycle )
-    if [ "${USE_INCREMENTAL:-0}" -eq 1 ]; then
+    if [[ $use_incremental -eq 1 ]]; then
       extra_flags+=( -incremental )
     fi
-    if [[ "${USE_STABLE_API:-0}" -eq 1 ]]; then
+    if [[ $use_stable_api -eq 1 ]]; then
       extra_flags+=( -enable-incremental-imports )
     else
       extra_flags+=( -enable-experimental-cross-module-incremental-build  )
     fi
+
+    extra_flags+=("$@")
 
     echo
     echo "* Compiling C *"

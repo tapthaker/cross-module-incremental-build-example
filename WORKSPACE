@@ -2,23 +2,21 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "build_bazel_apple_support",
-    sha256 = "d5a1156f8d443a39b20919d972e9e840b057ea1560acddb56736fdab764a341b",
-    strip_prefix = "apple_support-3c90f397de59178a110b34a4afd04d69f725f5cb",
-    url = "https://github.com/bazelbuild/apple_support/archive/3c90f397de59178a110b34a4afd04d69f725f5cb.tar.gz",
+    sha256 = "76df040ade90836ff5543888d64616e7ba6c3a7b33b916aa3a4b68f342d1b447",
+    url = "https://github.com/bazelbuild/apple_support/archive/0.11.0.tar.gz",
 )
 
 http_archive(
     name = "build_bazel_rules_apple",
-    sha256 = "a0b7066d9f4193e8a800db2a66f4fe867a7806b8cdeecc3f0b9c9b3fc415338e",
-    strip_prefix = "rules_apple-709d8b12d68b571f23a1187b1cf7b10bb89fa46f",
-    url = "https://github.com/bazelbuild/rules_apple/archive/709d8b12d68b571f23a1187b1cf7b10bb89fa46f.tar.gz",
+    sha256 = "0052d452af7742c8f3a4e0929763388a66403de363775db7e90adecb2ba4944b",
+    url = "https://github.com/bazelbuild/rules_apple/archive/0.31.3.tar.gz",
 )
 
 http_archive(
     name = "build_bazel_rules_swift",
-    sha256 = "7d57427bf94ac2a17799dc4475defaf4750650bbc3e8ad1173dceb481b3bc9d8",
-    strip_prefix = "rules_swift-aab5e21516bf971faba6053a414dac26224e588e",
-    url = "https://github.com/bazelbuild/rules_swift/archive/aab5e21516bf971faba6053a414dac26224e588e.tar.gz",
+    sha256 = "f3aecff3ef9c21da0283d61c0643357c82128c8b333d29bc5463bb549baab79d",
+    strip_prefix = "rules_swift-c3bf28c3a94d26442da824aa5b4a0c4ff4128e33",
+    url = "https://github.com/bazelbuild/rules_swift/archive/c3bf28c3a94d26442da824aa5b4a0c4ff4128e33.tar.gz",
 )
 
 load("@build_bazel_rules_swift//swift:repositories.bzl", "swift_rules_dependencies")

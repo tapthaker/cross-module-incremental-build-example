@@ -16,16 +16,16 @@ Available Tests:
 Available environment variables:
 
 - `USE_INCREMENTAL=1`: Uses the `-incremental` flag. This is of course required for cross module incremental builds.
-- `USE_STABLE_API=1`: Uses `-enable-incremental-imports` instead of `-enable-experimental-cross-module-incremental-build`, which is the flag that is used in Swift 5.5.
+- `USE_STABLE_API=0`: Uses `-enable-experimental-cross-module-incremental-build` instead of  `-enable-incremental-imports`, which is the flag that is used before Swift 5.5.
 - `USE_BAZEL=1`: Uses `bazel` to build instead of invoking `swiftc` directly.
 
 ## Results:
 ```
-Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
-Target: x86_64-apple-darwin20.5.0
+swift-driver version: 1.26.9 Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
+Target: arm64-apple-macosx11.0
 
-temp_dir: /var/folders/5r/ztqn6j_d32n3nnpz7wx2rgjh0000gn/T/tmp.Rl8JPaQe
-/var/folders/5r/ztqn6j_d32n3nnpz7wx2rgjh0000gn/T/tmp.Rl8JPaQe ~/cross-module-incremental-build-example
+temp_dir: /var/folders/dk/shrv9_1j25q9yt_77ty61qv00000gp/T/tmp.skSGvTE4
+/var/folders/dk/shrv9_1j25q9yt_77ty61qv00000gp/T/tmp.skSGvTE4 ~/cross-module-incremental-build-example
 
 Running 1
 Press any key to continue
@@ -39,40 +39,40 @@ Modifying C.json
 Modifying C.swift
 
 * Compiling C *
-Incremental compilation could not read build record.
-Disabling incremental build: could not read build record
-Blocked by: {compile: C.o <= C.swift}, now blocking jobs: [{merge-module: C.swiftmodule <= C.o}]
-Adding standard job to task queue: {compile: C.o <= C.swift}
-Added to TaskQueue: {compile: C.o <= C.swift}
-Job finished: {compile: C.o <= C.swift}
-Scheduling maybe-unblocked jobs: [{merge-module: C.swiftmodule <= C.o}]
-Adding standard job to task queue: {merge-module: C.swiftmodule <= C.o}
-Added to TaskQueue: {merge-module: C.swiftmodule <= C.o}
-Job finished: {merge-module: C.swiftmodule <= C.o}
+remark: Incremental compilation: Incremental compilation could not read build record at  '/var/folders/dk/shrv9_1j25q9yt_77ty61qv00000gp/T/tmp.skSGvTE4/C~buildrecord.swiftdeps'
+remark: Incremental compilation: Disabling incremental build: could not read build record
+remark: Incremental compilation: Enabling incremental cross-module building
+remark: Starting Compiling C.swift
+remark: Finished Compiling C.swift
+remark: Incremental compilation: Reading dependencies from C~partial.swiftdeps
+remark: Incremental compilation: Scheduling all post-compile jobs because something was compiled
+remark: Starting Merging module C
+remark: Finished Merging module C
 
 * Compiling B *
-Incremental compilation could not read build record.
-Disabling incremental build: could not read build record
-Blocked by: {compile: B.o <= B.swift}, now blocking jobs: [{merge-module: B.swiftmodule <= B.o}]
-Adding standard job to task queue: {compile: B.o <= B.swift}
-Added to TaskQueue: {compile: B.o <= B.swift}
-Job finished: {compile: B.o <= B.swift}
-Scheduling maybe-unblocked jobs: [{merge-module: B.swiftmodule <= B.o}]
-Adding standard job to task queue: {merge-module: B.swiftmodule <= B.o}
-Added to TaskQueue: {merge-module: B.swiftmodule <= B.o}
-Job finished: {merge-module: B.swiftmodule <= B.o}
+remark: Incremental compilation: Incremental compilation could not read build record at  '/var/folders/dk/shrv9_1j25q9yt_77ty61qv00000gp/T/tmp.skSGvTE4/B~buildrecord.swiftdeps'
+remark: Incremental compilation: Disabling incremental build: could not read build record
+remark: Incremental compilation: Enabling incremental cross-module building
+remark: Starting Compiling B.swift
+remark: Finished Compiling B.swift
+remark: Incremental compilation: Reading dependencies from B~partial.swiftdeps
+remark: Incremental compilation: Reading dependencies from tmp.skSGvTE4
+remark: Incremental compilation: Scheduling all post-compile jobs because something was compiled
+remark: Starting Merging module B
+remark: Finished Merging module B
 
 * Compiling A *
-Incremental compilation could not read build record.
-Disabling incremental build: could not read build record
-Blocked by: {compile: A.o <= A.swift}, now blocking jobs: [{merge-module: A.swiftmodule <= A.o}]
-Adding standard job to task queue: {compile: A.o <= A.swift}
-Added to TaskQueue: {compile: A.o <= A.swift}
-Job finished: {compile: A.o <= A.swift}
-Scheduling maybe-unblocked jobs: [{merge-module: A.swiftmodule <= A.o}]
-Adding standard job to task queue: {merge-module: A.swiftmodule <= A.o}
-Added to TaskQueue: {merge-module: A.swiftmodule <= A.o}
-Job finished: {merge-module: A.swiftmodule <= A.o}
+remark: Incremental compilation: Incremental compilation could not read build record at  '/var/folders/dk/shrv9_1j25q9yt_77ty61qv00000gp/T/tmp.skSGvTE4/A~buildrecord.swiftdeps'
+remark: Incremental compilation: Disabling incremental build: could not read build record
+remark: Incremental compilation: Enabling incremental cross-module building
+remark: Starting Compiling A.swift
+remark: Finished Compiling A.swift
+remark: Incremental compilation: Reading dependencies from A~partial.swiftdeps
+remark: Incremental compilation: Reading dependencies from tmp.skSGvTE4
+remark: Incremental compilation: Reading dependencies from tmp.skSGvTE4
+remark: Incremental compilation: Scheduling all post-compile jobs because something was compiled
+remark: Starting Merging module A
+remark: Finished Merging module A
 
 Running 2
 Press any key to continue
@@ -81,34 +81,81 @@ Press any key to continue
 Modifying C.swift
 
 * Compiling C *
-Queuing (initial): {compile: C.o <= C.swift}
-Blocked by: {compile: C.o <= C.swift}, now blocking jobs: [{merge-module: C.swiftmodule <= C.o}]
-Queuing : {merge-module: C.swiftmodule <= C.o}
-Adding standard job to task queue: {compile: C.o <= C.swift}
-Added to TaskQueue: {compile: C.o <= C.swift}
-Job finished: {compile: C.o <= C.swift}
-Scheduling maybe-unblocked jobs: [{merge-module: C.swiftmodule <= C.o}]
-Already scheduled: {compile: C.o <= C.swift}
-Adding standard job to task queue: {merge-module: C.swiftmodule <= C.o}
-Added to TaskQueue: {merge-module: C.swiftmodule <= C.o}
-Job finished: {merge-module: C.swiftmodule <= C.o}
+remark: Incremental compilation: Read dependency graph '/var/folders/dk/shrv9_1j25q9yt_77ty61qv00000gp/T/tmp.skSGvTE4/C~buildrecord.priors'
+remark: Incremental compilation: Enabling incremental cross-module building
+remark: Incremental compilation: Scheduing changed input  {compile: C.o <= C.swift}
+remark: Incremental compilation: Queuing (initial):  {compile: C.o <= C.swift}
+remark: Incremental compilation: not scheduling dependents of C.swift; unknown changes
+remark: Starting Compiling C.swift
+remark: Finished Compiling C.swift
+remark: Incremental compilation: Reading dependencies from C~partial.swiftdeps
+remark: Incremental compilation: Fingerprint changed for interface of source file C~partial.swiftdeps in C~partial.swiftdeps
+remark: Incremental compilation: Fingerprint changed for implementation of source file C~partial.swiftdeps in C~partial.swiftdeps
+remark: Incremental compilation: New definition: interface of top-level name 'FooBar' in C~partial.swiftdeps
+remark: Incremental compilation: New definition: implementation of top-level name 'FooBar' in C~partial.swiftdeps
+remark: Incremental compilation: New definition: interface of type '1C6FooBarV' in C~partial.swiftdeps
+remark: Incremental compilation: New definition: implementation of type '1C6FooBarV' in C~partial.swiftdeps
+remark: Incremental compilation: New definition: interface of potential members of '1C6FooBarV' in C~partial.swiftdeps
+remark: Incremental compilation: New definition: implementation of potential members of '1C6FooBarV' in C~partial.swiftdeps
+remark: Incremental compilation: Scheduling all post-compile jobs because something was compiled
+remark: Starting Merging module C
+remark: Finished Merging module C
 
 * Compiling B *
-Queuing because of incremental external dependencies: {compile: B.o <= B.swift}
-	interface of top-level name 'fromC' in /var/folders/5r/ztqn6j_d32n3nnpz7wx2rgjh0000gn/T/tmp.Rl8JPaQe/C.swiftmodule -> implementation of source file B.swiftdeps
-Blocked by: {compile: B.o <= B.swift}, now blocking jobs: [{merge-module: B.swiftmodule <= B.o}]
-Queuing : {merge-module: B.swiftmodule <= B.o}
-Adding standard job to task queue: {compile: B.o <= B.swift}
-Added to TaskQueue: {compile: B.o <= B.swift}
-Job finished: {compile: B.o <= B.swift}
-Scheduling maybe-unblocked jobs: [{merge-module: B.swiftmodule <= B.o}]
-Adding standard job to task queue: {merge-module: B.swiftmodule <= B.o}
-Added to TaskQueue: {merge-module: B.swiftmodule <= B.o}
-Job finished: {merge-module: B.swiftmodule <= B.o}
+remark: Incremental compilation: Read dependency graph '/var/folders/dk/shrv9_1j25q9yt_77ty61qv00000gp/T/tmp.skSGvTE4/B~buildrecord.priors'
+remark: Incremental compilation: Reading dependencies from tmp.skSGvTE4
+remark: Incremental compilation: Fingerprint changed for interface of source file C in tmp.skSGvTE4
+remark: Incremental compilation: Fingerprint changed for implementation of source file C in tmp.skSGvTE4
+remark: Incremental compilation: New definition: interface of top-level name 'FooBar' in tmp.skSGvTE4
+remark: Incremental compilation: New definition: implementation of top-level name 'FooBar' in tmp.skSGvTE4
+remark: Incremental compilation: New definition: interface of type '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: New definition: implementation of type '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: New definition: interface of potential members of '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: New definition: implementation of potential members of '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> interface of top-level name 'FooBar' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> interface of source file C in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> implementation of top-level name 'FooBar' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> interface of potential members of '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> implementation of potential members of '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> implementation of source file C in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> interface of type '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> implementation of type '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: Traced: interface of source file C -> interface of top-level name 'fromC' -> implementation of source file B~partial.swiftdeps in B.swift
+remark: Incremental compilation: Enabling incremental cross-module building
+remark: Incremental compilation: May skip current input:  {compile: B.o <= B.swift}
+remark: Incremental compilation: Invalidated externally; will queue  {compile: B.o <= B.swift}
+remark: Incremental compilation: Queuing (initial):  {compile: B.o <= B.swift}
+remark: Starting Compiling B.swift
+remark: Finished Compiling B.swift
+remark: Incremental compilation: Reading dependencies from B~partial.swiftdeps
+remark: Incremental compilation: Scheduling all post-compile jobs because something was compiled
+remark: Starting Merging module B
+remark: Finished Merging module B
 
 * Compiling A *
-Job skipped: {compile: A.o <= A.swift}
-Job skipped: {merge-module: A.swiftmodule <= A.o}
+remark: Incremental compilation: Read dependency graph '/var/folders/dk/shrv9_1j25q9yt_77ty61qv00000gp/T/tmp.skSGvTE4/A~buildrecord.priors'
+remark: Incremental compilation: Reading dependencies from tmp.skSGvTE4
+remark: Incremental compilation: Fingerprint changed for interface of source file C in tmp.skSGvTE4
+remark: Incremental compilation: Fingerprint changed for implementation of source file C in tmp.skSGvTE4
+remark: Incremental compilation: New definition: interface of top-level name 'FooBar' in tmp.skSGvTE4
+remark: Incremental compilation: New definition: implementation of top-level name 'FooBar' in tmp.skSGvTE4
+remark: Incremental compilation: New definition: interface of type '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: New definition: implementation of type '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: New definition: interface of potential members of '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: New definition: implementation of potential members of '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> interface of type '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> implementation of source file C in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> interface of potential members of '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> interface of top-level name 'FooBar' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> implementation of type '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> implementation of top-level name 'FooBar' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> implementation of potential members of '1C6FooBarV' in tmp.skSGvTE4
+remark: Incremental compilation: Changed: tmp.skSGvTE4 -> interface of source file C in tmp.skSGvTE4
+remark: Incremental compilation: Enabling incremental cross-module building
+remark: Incremental compilation: May skip current input:  {compile: A.o <= A.swift}
+remark: Incremental compilation: Skipping input:  {compile: A.o <= A.swift}
+remark: Incremental compilation: Skipping job: Merging module A; oldest output is current '/var/folders/dk/shrv9_1j25q9yt_77ty61qv00000gp/T/tmp.skSGvTE4/A.swiftmodule'
+remark: Skipped Compiling A.swift
 
 Cleaning
 Press any key to continue
